@@ -6,7 +6,6 @@ export const CELL_GAP: number = 2
 
 export default class Grid {
   private readonly _grid: HTMLDivElement
-  private _cells: Cell[]
 
   constructor (grid: HTMLDivElement) {
     this._grid = grid
@@ -15,8 +14,14 @@ export default class Grid {
     this.init()
   }
 
+  private _cells: Cell[]
+
   get cells (): Cell[] {
     return this._cells
+  }
+
+  set cells (cells: Cell[]) {
+    this._cells = cells
   }
 
   get emptyCells (): Cell[] {
@@ -43,11 +48,7 @@ export default class Grid {
     return this._grid
   }
 
-  set cells (cells: Cell[]) {
-    this._cells = cells
-  }
-
-  public init (): void  {
+  public init (): void {
     this.grid.style.setProperty('--grid-size', `${GRID_SIZE}`)
     this.grid.style.setProperty('--cell-size', `${CELL_SIZE}vmin`)
     this.grid.style.setProperty('--cell-gap', `${CELL_GAP}vmin`)

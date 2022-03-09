@@ -1,10 +1,5 @@
 export default class Tile {
   private readonly _gameBoard: HTMLDivElement
-  private _x: number
-  private _y: number
-  private _value: number | undefined
-  private _tileElement: HTMLDivElement | null
-  private _type: boolean | undefined
 
   constructor (gameBoard: HTMLDivElement, value: number = Math.random() < 0.5 ? 2 : 4) {
     this._gameBoard = gameBoard
@@ -15,32 +10,10 @@ export default class Tile {
     this.value = value
   }
 
-  get gameBoard (): HTMLDivElement {
-    return this._gameBoard
-  }
+  private _x: number
 
   get x (): number {
     return this._x
-  }
-
-  get y (): number {
-    return this._y
-  }
-
-  get value (): number {
-    return <number>this._value
-  }
-
-  get type (): boolean {
-    return <boolean>this._type
-  }
-
-  get tileElement (): HTMLDivElement | null {
-    return this._tileElement
-  }
-
-  get gameBoardElement (): HTMLDivElement {
-    return this._gameBoard
   }
 
   set x (x: number) {
@@ -48,9 +21,21 @@ export default class Tile {
     this._tileElement!.style.setProperty('--x', `${this.x}`)
   }
 
+  private _y: number
+
+  get y (): number {
+    return this._y
+  }
+
   set y (y: number) {
     this._y = y
     this._tileElement!.style.setProperty('--y', `${this.y}`)
+  }
+
+  private _value: number | undefined
+
+  get value (): number {
+    return <number>this._value
   }
 
   set value (value: number) {
@@ -65,8 +50,28 @@ export default class Tile {
     this.tileElement!.style.setProperty('--text-lightness', `${textLightness}%`)
   }
 
+  private _tileElement: HTMLDivElement | null
+
+  get tileElement (): HTMLDivElement | null {
+    return this._tileElement
+  }
+
   set tileElement (tileElement: HTMLDivElement | null) {
     this._tileElement = tileElement
+  }
+
+  private _type: boolean | undefined
+
+  get type (): boolean {
+    return <boolean>this._type
+  }
+
+  get gameBoard (): HTMLDivElement {
+    return this._gameBoard
+  }
+
+  get gameBoardElement (): HTMLDivElement {
+    return this._gameBoard
   }
 
   public init (): void {

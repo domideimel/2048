@@ -4,14 +4,41 @@ export default class Cell {
   private readonly _cell: HTMLDivElement
   private readonly _x: number
   private readonly _y: number
-  private _tile: Tile | null
-  private _mergeTile: Tile | null | undefined
 
   constructor (cell: HTMLDivElement, x: number, y: number) {
     this._cell = cell
     this._x = x
     this._y = y
     this._tile = null
+  }
+
+  private _tile: Tile | null
+
+  get tile () {
+    return this._tile
+  }
+
+  set tile (value: Tile | null) {
+    this._tile = value
+
+    if (value == null) return
+    this._tile!.x = this._x
+    this._tile!.y = this._y
+  }
+
+  private _mergeTile: Tile | null | undefined
+
+  // @ts-ignore
+  get mergeTile (): Tile | null | undefined {
+    return this._mergeTile
+  }
+
+  set mergeTile (value: Tile | null) {
+    this._mergeTile = value
+
+    if (value == null) return
+    this._mergeTile!.x = this._x
+    this._mergeTile!.y = this._y
   }
 
   get cell (): HTMLDivElement {
@@ -24,31 +51,6 @@ export default class Cell {
 
   get y (): number {
     return this._y
-  }
-
-  get tile () {
-    return this._tile
-  }
-
-  // @ts-ignore
-  get mergeTile (): Tile | null | undefined {
-    return this._mergeTile
-  }
-
-  set tile (value: Tile | null) {
-    this._tile = value
-
-    if (value == null) return
-    this._tile!.x = this._x
-    this._tile!.y = this._y
-  }
-
-  set mergeTile (value: Tile | null) {
-    this._mergeTile = value
-
-    if (value == null) return
-    this._mergeTile!.x = this._x
-    this._mergeTile!.y = this._y
   }
 
   public canAccept (tile: Tile | null): boolean {
